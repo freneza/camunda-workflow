@@ -22,6 +22,8 @@ This project uses the C# client Camunda library [Camunda.Api.Client](https://git
 ### Running the solution:
 
 1. Start Camunda Server.
+You can do this running the docker-compose.yml in the root folder:
+`docker-compose up`
 2. Deploy the workflow to http://localhost:8080/engine-rest (if you wish feel free to change this address but remember to also change the connection path inside the projects).
 3. Run both projects of the solution.
 4. Send a `POST /users/register` request. Payload example:
