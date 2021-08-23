@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+    camunda:
+        image: camunda/camunda-bpm-platform:${DISTRO:-latest}
+        ports:
+            - "8080:8080"
+        restart: unless-stopped
+        environment:
+            - DB_DRIVER=com.mysql.cj.jdbc.Driver
+            - DB_URL=jdbc:mysql://mysql:3306/process-engine?sendFractionalSeconds=false
+            - DB_USERNAME=camunda
+            - DB_PASSWORD=camunda
+            - WAIT_FOR=mysql:3306
+        links:
+            - mysql
+
+    mysql:
+        image: mysql:5.7
+        container_name: camunda_mysql
+        ports:
+            - '3306:3306'
+        environment:
+            - MYSQL_ROOT_PASSWORD=camunda
+            - MYSQL_USER=camunda
+            - MYSQL_PASSWORD=camunda
+            - MYSQL_DATABASE=process-engine
