@@ -39,7 +39,9 @@ namespace UserRegistrationApi.Controllers
                 newProcessInstance.SetVariable("password", VariableValue.FromObject(request.Password));
 
                 // Sending process to camunda
-                await camunda.ProcessDefinitions.ByKey("user_registration").StartProcessInstance(newProcessInstance);
+                await camunda.ProcessDefinitions.
+                    ByKey("user_registration", "CashmeTest").
+                    StartProcessInstance(newProcessInstance);
 
                 return StatusCode(StatusCodes.Status200OK);
             }
